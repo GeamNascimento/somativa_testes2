@@ -1,6 +1,9 @@
-name: Run Tests
+name: Run Tests with Jest
 
 on:
+  push:
+    branches:
+      - main
   pull_request:
     branches:
       - main
@@ -10,16 +13,19 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout do código
-      uses: actions/checkout@v3
+    - name: Checkout code
+      uses: actions/checkout@v2
 
-    - name: Instalar Node.js
-      uses: actions/setup-node@v3
+    - name: Set up Node.js
+      uses: actions/setup-node@v2
       with:
-        node-version: 16
+        node-version: '14'
 
-    - name: Instalar dependências
-      run: npm install
+    - name: Install dependencies
+      run: |
+        npm install
+        chmod +x ./node_modules/.bin/jest  # Permissões para jest
 
-    - name: Rodar testes
+    - name: Run tests
       run: npm test
+

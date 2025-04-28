@@ -1,25 +1,26 @@
-name: Run Tests
+name: Node.js CI
 
 on:
   pull_request:
-    branches:
-      - main
+    branches: [main]
 
 jobs:
-  test:
+  build:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout do código
-      uses: actions/checkout@v3
+    - uses: actions/checkout@v4
 
-    - name: Instalar Node.js
-      uses: actions/setup-node@v3
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
       with:
-        node-version: 16
+        node-version: '20'
 
-    - name: Instalar dependências
+    - name: Install dependencies
       run: npm install
 
-    - name: Rodar testes
+    - name: Install Jest
+      run: npm install jest --save-dev
+
+    - name: Run tests
       run: npm test

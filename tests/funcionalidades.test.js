@@ -46,3 +46,4 @@ test('Testar autenticação de usuários', () => {
     const senhaDigitada = '123456';
     expect(autenticarUsuario(usuario, senhaDigitada)).toBe(true);
 });
+
